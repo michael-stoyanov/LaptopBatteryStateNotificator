@@ -1,0 +1,7 @@
+C:\Users\kar70\source\repos\test\BatteryNotificator\bin\Debug\BatteryNotificator.exe.config
+C:\Users\kar70\source\repos\test\BatteryNotificator\bin\Debug\BatteryNotificator.exe
+C:\Users\kar70\source\repos\test\BatteryNotificator\bin\Debug\BatteryNotificator.pdb
+C:\Users\kar70\source\repos\test\BatteryNotificator\obj\Debug\BatteryNotificator.csprojAssemblyReference.cache
+C:\Users\kar70\source\repos\test\BatteryNotificator\obj\Debug\BatteryNotificator.csproj.CoreCompileInputs.cache
+C:\Users\kar70\source\repos\test\BatteryNotificator\obj\Debug\BatteryNotificator.exe
+C:\Users\kar70\source\repos\test\BatteryNotificator\obj\Debug\BatteryNotificator.pdb
