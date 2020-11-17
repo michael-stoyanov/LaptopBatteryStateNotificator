@@ -15,7 +15,7 @@
             {
                 state = PowerState.GetPowerState();
 
-                if (state.BatteryLifePercent <= 35 && !state.ACLineStatus.Equals(ACLineStatus.Online))
+                if (state.BatteryLifePercent <= 35 && state.ACLineStatus.Equals(ACLineStatus.Offline))
                     for (int i = 0; i < 5; i++)
                     {
                         state = PowerState.GetPowerState();
@@ -23,9 +23,9 @@
                         if (state.ACLineStatus.Equals(ACLineStatus.Online))
                             break;
 
-                        System.Media.SystemSounds.Beep.Play();
+                        PlaySoundAndSleep();
                     }
-                else if (state.BatteryLifePercent >= 95 && !state.ACLineStatus.Equals(ACLineStatus.Online))
+                else if (state.BatteryLifePercent >= 95 && state.ACLineStatus.Equals(ACLineStatus.Online))
                     for (int i = 0; i < 5; i++)
                     {
                         state = PowerState.GetPowerState();
@@ -33,11 +33,17 @@
                         if (state.ACLineStatus.Equals(ACLineStatus.Offline))
                             break;
 
-                        System.Media.SystemSounds.Beep.Play();
+                        PlaySoundAndSleep();
                     }
 
                 Thread.Sleep(TimeSpan.FromMinutes(1));
             }
+        }
+
+        private static void PlaySoundAndSleep()
+        {
+            System.Media.SystemSounds.Beep.Play();
+            Thread.Sleep(TimeSpan.FromSeconds(3.5));
         }
     }
 
