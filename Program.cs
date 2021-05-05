@@ -3,6 +3,7 @@
     using System;
     using System.Runtime.InteropServices;
     using System.Threading;
+    using System.Windows.Forms;
 
     // Program class with main entry point to display an example.
     public class Program
@@ -15,35 +16,27 @@
             {
                 state = PowerState.GetPowerState();
 
-                if (state.BatteryLifePercent <= 35 && state.ACLineStatus.Equals(ACLineStatus.Offline))
-                    for (int i = 0; i < 5; i++)
-                    {
-                        state = PowerState.GetPowerState();
-
-                        if (state.ACLineStatus.Equals(ACLineStatus.Online))
-                            break;
-
-                        PlaySoundAndSleep();
-                    }
-                else if (state.BatteryLifePercent >= 95 && state.ACLineStatus.Equals(ACLineStatus.Online))
-                    for (int i = 0; i < 5; i++)
-                    {
-                        state = PowerState.GetPowerState();
-
-                        if (state.ACLineStatus.Equals(ACLineStatus.Offline))
-                            break;
-
-                        PlaySoundAndSleep();
-                    }
+                if (state.BatteryLifePercent <= 30 && state.ACLineStatus.Equals(ACLineStatus.Offline))
+                {
+                    MessageBox.Show("Battery is low!",
+                                    "Battery Power State",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Warning,
+                                    MessageBoxDefaultButton.Button1,
+                                    MessageBoxOptions.DefaultDesktopOnly);
+                }
+                else if (state.BatteryLifePercent >= 100 && state.ACLineStatus.Equals(ACLineStatus.Online))
+                {
+                    MessageBox.Show("Battery is fully charged!", 
+                                    "Battery Power State", 
+                                    MessageBoxButtons.OK, 
+                                    MessageBoxIcon.Warning, 
+                                    MessageBoxDefaultButton.Button1, 
+                                    MessageBoxOptions.DefaultDesktopOnly);
+                }
 
                 Thread.Sleep(TimeSpan.FromMinutes(1));
             }
-        }
-
-        private static void PlaySoundAndSleep()
-        {
-            System.Media.SystemSounds.Beep.Play();
-            Thread.Sleep(TimeSpan.FromSeconds(3.5));
         }
     }
 
