@@ -1,4 +1,4 @@
-﻿namespace BatteryNotificator
+namespace BatteryNotificator
 {
     using System;
     using System.Runtime.InteropServices;
@@ -27,11 +27,11 @@
                 }
                 else if (state.BatteryLifePercent >= 100 && state.ACLineStatus.Equals(ACLineStatus.Online))
                 {
-                    MessageBox.Show("Battery is fully charged!", 
-                                    "Battery Power State", 
-                                    MessageBoxButtons.OK, 
-                                    MessageBoxIcon.Warning, 
-                                    MessageBoxDefaultButton.Button1, 
+                    MessageBox.Show("Battery is fully charged!",
+                                    "Battery Power State",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Warning,
+                                    MessageBoxDefaultButton.Button1,
                                     MessageBoxOptions.DefaultDesktopOnly);
                 }
 
@@ -43,6 +43,8 @@
     [StructLayout(LayoutKind.Sequential)]
     public class PowerState
     {
+        private static PowerState pwrState;
+
         public ACLineStatus ACLineStatus;
         public BatteryFlag BatteryFlag;
         public Byte BatteryLifePercent;
@@ -55,9 +57,11 @@
 
         public static PowerState GetPowerState()
         {
-            PowerState state = new PowerState();
-            if (GetSystemPowerStatusRef(state))
-                return state;
+            if (pwrState == null)
+                pwrState = new PowerState();
+
+            if (GetSystemPowerStatusRef(pwrState))
+                return pwrState;
 
             throw new ApplicationException("Unable to get power state");
         }
